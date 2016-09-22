@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">BCT</string>
+
+    <!-- Strings related to login -->
+    <string name="personnel_name">Name of the Personnel</string>
+    <string name="address">Address</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+    <string name="DateTime">Time</string>
+    <string name="action_Record">Record Visit</string>
+</resources>
