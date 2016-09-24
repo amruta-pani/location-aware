@@ -14,6 +14,9 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -35,6 +38,7 @@ import com.google.android.gms.location.LocationSettingsStatusCodes;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -58,7 +62,14 @@ public class PresenceMark extends AppCompatActivity implements GoogleApiClient.C
     private TextView mLatitude, mLongitude;
     private Double myLatitude, myLongitude;
     private long nwTime = 0;
+    private AutoCompleteTextView mVillageView;
+    private ArrayAdapter<String> adapter;
+
+    private String villageNames[];
+    private String villageName;
+    private String myAddress;
     private String dateTime;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,20 +83,30 @@ public class PresenceMark extends AppCompatActivity implements GoogleApiClient.C
         mTimeView = (TextView) findViewById(R.id.time);
         mLatitude = (TextView) findViewById(R.id.latitude);
         mLongitude = (TextView) findViewById(R.id.longitude);
+        mVillageView = (AutoCompleteTextView) findViewById(R.id.village);
+
+        //this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+        villageNames = getResources().getStringArray(R.array.villages);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, villageNames);
+
+        mVillageView.setAdapter(adapter);
+        mVillageView.setThreshold(1);
+
+
+        mVillageView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                villageName = parent.getItemAtPosition(position).toString().trim();
+                //Toast.makeText(getApplicationContext(), villageName + " Selected", Toast.LENGTH_LONG).show();
+            }
+        });
 
         mPersonnelNameView.setOnEditorActionListener(new EditText.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-
-                mPersonnelNameView.setError(null);
-                if (!mPersonnelNameView.getText().toString().equals("")) {
-                    mGoogleApiClient.connect();
-                    return true;
-                } else {
-                    mPersonnelNameView.setError("This field is required");
-                    mPersonnelNameView.requestFocus();
-                    return false;
-                }
+                attemptRecord();
+                return true;
             }
         });
 
@@ -99,19 +120,55 @@ public class PresenceMark extends AppCompatActivity implements GoogleApiClient.C
         }
 
         Button mRecordButton = (Button) findViewById(R.id.record_visit);
+        Button mCaptureLocation = (Button) findViewById(R.id.capture);
+
+        mCaptureLocation.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mGoogleApiClient.connect();
+            }
+        });
+
         mRecordButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                mPersonnelNameView.setError(null);
-                if (!mPersonnelNameView.getText().toString().equals("")) {
-                    mGoogleApiClient.connect();
-
-                } else {
-                    mPersonnelNameView.setError("This field is required");
-                    mPersonnelNameView.requestFocus();
-                }
+                attemptRecord();
             }
         });
+    }
+
+    private void attemptRecord() {
+        mPersonnelNameView.setError(null);
+        mVillageView.setError(null);
+        mLatitude.setError(null);
+
+        villageName = mVillageView.getText().toString().toUpperCase();
+
+        if (mPersonnelNameView.getText().toString().equals("")) {   //Personal Name cannot be left empty
+            mPersonnelNameView.setError("This field is required");
+            mPersonnelNameView.requestFocus();
+        } else if (mVillageView.getText().toString().equals("")) {  //Village name should have been selected
+            mVillageView.setError("This field is required");
+            mVillageView.requestFocus();
+        } else if (!isVillageInVillageList()) {     //entered village name should be in the villages' list.
+            mVillageView.setError("Village does not exist in the list. Type a character and select the village from the drop down.");
+            mVillageView.requestFocus();
+        } /*else if (mLatitude.getText().toString().equals("") || mLongitude.getText().toString().equals("")
+                || mAddressView.getText().toString().equals("")) {
+            mLatitude.setError("These fields are required. Press the Capture Location button to fetch these values.");
+            mLatitude.requestFocus();
+        }*/ else {
+            Toast.makeText(getApplicationContext(), "Name, Address and Time will be recorded on Server", Toast.LENGTH_SHORT).show();
+            /*
+            * TODO: record data here
+             */
+        }
+    }
+
+    private boolean isVillageInVillageList() {
+
+        return Arrays.asList(villageNames).contains(villageName.trim());
+//        Toast.makeText(getApplicationContext(), "" + contains, Toast.LENGTH_SHORT).show();
     }
 
     private void setDateTime() {
@@ -123,7 +180,8 @@ public class PresenceMark extends AppCompatActivity implements GoogleApiClient.C
 
         Date currentTime = cal.getTime();
 
-        mTimeView.setText(dateFormat.format(currentTime));
+        dateTime = dateFormat.format(currentTime);
+        mTimeView.setText(dateTime);
     }
 
     @Override
@@ -140,9 +198,7 @@ public class PresenceMark extends AppCompatActivity implements GoogleApiClient.C
         }
 
         requestLocation();
-
         LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
-
         myLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
 
 
@@ -159,6 +215,7 @@ public class PresenceMark extends AppCompatActivity implements GoogleApiClient.C
         } else
             Toast.makeText(getApplicationContext(), "Unable to retrieve your location co-ordinates right now. Leave your GPS ON " +
                     "for a few minutes before you try again or move to a more open-air location.", Toast.LENGTH_LONG).show();
+        mGoogleApiClient.disconnect();
     }
 
     @Override
@@ -247,14 +304,11 @@ public class PresenceMark extends AppCompatActivity implements GoogleApiClient.C
             String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
             String city = addresses.get(0).getLocality();
             String state = addresses.get(0).getAdminArea();
-            String country = addresses.get(0).getCountryName();
+//            String country = addresses.get(0).getCountryName();
             String postalCode = addresses.get(0).getPostalCode();
-            String knownName = addresses.get(0).getFeatureName(); // Only if available else return NULL
+//            String knownName = addresses.get(0).getFeatureName(); // Only if available else return NULL
 
-            mAddressView.setText(address + "; " + city + "; " + state + "; " + country + "; " +
-                    postalCode + "; " + knownName);
-
-            Toast.makeText(getApplicationContext(), "Name, Address and Time will be recorded on Server", Toast.LENGTH_SHORT).show();
+            mAddressView.setText(address + "; " + city + "; " + state + "; " + "; " + postalCode);
 
            /* Toast.makeText(getApplicationContext(), address + "; " + city + "; " + state + "; " + country + "; " +
                     postalCode + "; " + knownName, Toast.LENGTH_LONG).show();*/
@@ -265,7 +319,7 @@ public class PresenceMark extends AppCompatActivity implements GoogleApiClient.C
                     "\n" + "Address could not be retrieved");
         }
         mGoogleApiClient.disconnect();
-        nwTime = 0;   //resetting the network time value local copy to 0
+        nwTime = 0;   //resetting the network time local copy to 0
     }
 }
 

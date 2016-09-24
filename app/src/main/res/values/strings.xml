@@ -8,4 +8,127 @@
     <string name="longitude">Longitude</string>
     <string name="DateTime">Time</string>
     <string name="action_Record">Record Visit</string>
+    <string name="capture">Capture Location</string>
+    <string name="village_name">Name of the Village</string>
+
+    
+    <string-array name="villages">
+        <item>A. S. PETA</item>
+        <item>ANTHADA</item>
+        <item>APPANNAPALEM</item>
+        <item>APPANNAPALEM</item>
+        <item>APPARAYUDUPALEM</item>
+        <item>ARBUPALEM</item>
+        <item>BANGARAMPETA</item>
+        <item>BHOGAPURAM</item>
+        <item>CH. NAGAPURAM</item>
+        <item>CHEEMLAPALLI</item>
+        <item>CHERLOPALEM</item>
+        <item>CHINAGOLLALAPALEM</item>
+        <item>CHINAPALEM</item>
+        <item>CHINNAKALAVALAPALLI</item>
+        <item>CHUCHUKONDA</item>
+        <item>CHUTTUBANDA</item>
+        <item>DHARAPALEM</item>
+        <item>DIMILI</item>
+        <item>DOSURU</item>
+        <item>ENUGUTUNI </item>
+        <item>ETIKOPPAKA</item>
+        <item>GANAPARTHI</item>
+        <item>GILLEDUPUDI</item>
+        <item>GOKIVADA</item>
+        <item>GOLLALAPALEM</item>
+        <item>GORLIDHARMAVARAM</item>
+        <item>GOVINDAPALEM</item>
+        <item>H.ANDHALAPALLI</item>
+        <item>HARIPALEM</item>
+        <item>HARIPURAM</item>
+        <item>JAGGANNAPETA</item>
+        <item>JAMAAPLEM</item>
+        <item>JANGULURU VELAMPALEM</item>
+        <item>K. K. P. AGRHARAM</item>
+        <item>KALAVALAPALLI KOMPALU</item>
+        <item>KATTUBOLU</item>
+        <item>KATTUPALEM</item>
+        <item>KHAJEEPALEM</item>
+        <item>KOKKIRAPALLI</item>
+        <item>KONDAKARLA</item>
+        <item>KONDAVARIPALEM</item>
+        <item>KOPPUGONDUPALEM</item>
+        <item>KOTHALI</item>
+        <item>KOTHAPATNAM</item>
+        <item>KOTHAPETA</item>
+        <item>KOTHAPLEM</item>
+        <item>KOTHPALEM</item>
+        <item>KOTHURU</item>
+        <item>KRISHNAMMAPALEM</item>
+        <item>KUMARAPURAM</item>
+        <item>KUMMARAPALLI</item>
+        <item>LANKA DHARMAVARAM</item>
+        <item>LOVAPALEM</item>
+        <item>M. J. PURAM</item>
+        <item>M. V. PETA</item>
+        <item>MADAKAPALEM</item>
+        <item>MADUTHURU</item>
+        <item>MALLAVRAM</item>
+        <item>MAMIDIVADA</item>
+        <item>MANTHRIPALEM</item>
+        <item>MARRIPALEM</item>
+        <item>MELUPAKA</item>
+        <item>MULAJAMPA</item>
+        <item>MULAKOTHURU</item>
+        <item>MUNAGAPAKAPETA</item>
+        <item>MURAKADA</item>
+        <item>NAGULAPALLI</item>
+        <item>NARAYANAPURAM</item>
+        <item>P. ANANDAPURAM</item>
+        <item>P. N. R. PETA</item>
+        <item>P. SOMAVARAM</item>
+        <item>PALLAVURU</item>
+        <item>PANCHDHARLA</item>
+        <item>PATIPALLI</item>
+        <item>PEDAGOLLELAPALEM</item>
+        <item>PEDAKALAVALAPALLI</item>
+        <item>PEDAMAKAVARAM </item>
+        <item>PEDAPADU</item>
+        <item>PEDAPALLI</item>
+        <item>PUDIMADAKA</item>
+        <item>PURSOTHAPURAM</item>
+        <item>RAJAKODURU</item>
+        <item>RAJALA</item>
+        <item>RAMAGIRI</item>
+        <item>RATNAMPETA</item>
+        <item>RAVANAPALLI</item>
+        <item>REGUPALEM</item>
+        <item>SAITHARUPETA</item>
+        <item>SANTHAPALEM</item>
+        <item>SARABANNAPALEM</item>
+        <item>SARVASUDHI</item>
+        <item>SEZ DIBBAPALEM</item>
+        <item>SOMALINGAPALEM</item>
+        <item>SUDDALAPALEM</item>
+        <item>TERUVUPALLI</item>
+        <item>THATALURU</item>
+        <item>TURAGALAPALEM</item>
+        <item>UMMALADA</item>
+        <item>UPPARAPALLI</item>
+        <item>UPPAVARAM</item>
+        <item>VADANARSAPURAM</item>
+        <item>VADAPALEM</item>
+        <item>VADRAPALLI</item>
+        <item>VALASAMPETA</item>
+        <item>VEDURUPARTHI</item>
+        <item>VELCHURU</item>
+        <item>VELPUGONDAPALEM</item>
+        <item>VEMAGIRI</item>
+        <item>VENKATAPURAM</item>
+        <item>VENKATAPURAM</item>
+        <item>VENKAYYAPALEM</item>
+        <item>VOMPULU</item>
+        <item>Y. LOVA</item>
+        <item>YADAGIRIPALEM</item>
+        <item>YATHAKOTHAPATNAM</item>
+        <item>YERIKIREDDIPALEM</item>
+        <item>YERRAVARAM-7</item>
+    </string-array>
 </resources>
