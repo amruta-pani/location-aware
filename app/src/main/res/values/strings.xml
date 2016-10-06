@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BCT</string>
+    <string name="app_name">BCT-CO-VillageVisit</string>
 
     <!-- Strings related to login -->
     <string name="personnel_name">Name of the Personnel</string>
@@ -9,8 +9,32 @@
     <string name="DateTime">Time</string>
     <string name="action_Record">Record Visit</string>
     <string name="capture">Capture Location</string>
+    <string name="loading">Connecting to Server, Please wait...</string>
     <string name="village_name">Name of the Village</string>
+    <string name="no_internet">Device is not connected to the Internet.</string>
+    <string name="no_address_wo_internet">Address cannot be retrieved without internet.</string>
+    <string name="no_address">Address cannot be retrieved for this location.</string>
+    <string name="no_gps">Unable to retrieve your location co-ordinates right now.
+        Leave your GPS ON for a few minutes before you try again or move to a wider open-air location.</string>
+    <string name="field_required">This field is required</string>
+    <string name="no_village_autocomplete">"Village does not exist in the list.
+        Type a character and select the village from the drop down."</string>
+    <string name="no_coname_autocomplete">CO Name does not exist in the list.
+    Type a character and select the name from the drop down.</string>
+    <string name="capture_field_required">These fields are required.
+        Press the Capture Location button to fetch these values.</string>
+    <string name="no_internet_to_push">Device is not connected to the Internet right now.
+        Your data is saved and will be pushed to server when a connection is found again.</string>
 
+
+    <string-array name="co">
+        <item>S. V. RAMANA</item>
+        <item>P. A. NAIDU</item>
+        <item>B. LAKSHMI NARAYANA</item>
+        <item>S. NAGESWARA RAO</item>
+        <item>TBH1</item>
+        <item>TBH2</item>
+    </string-array>
     
     <string-array name="villages">
         <item>A. S. PETA</item>
